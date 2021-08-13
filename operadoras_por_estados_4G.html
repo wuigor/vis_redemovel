@@ -1,0 +1,626 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Visualizações Cobertura Movel</title>
+<link href="estilo.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+	<header>
+		<a class="link-logo" href="index.html">
+			<div id="logo" class="font_Uchen">
+			REDE MÓVEL</br>
+			BRASIL
+			</div>
+		</a>
+
+		<div id="menu"></div>
+
+	</header>
+
+	<main>
+
+
+		
+
+
+
+		<div id="box_view">
+
+			<p class="titulo font_Montserrat">Cobertura de rede móvel por operadoras e por estados</p>
+
+            <div id="box_spac2"></div>
+			<div id="box_g1">
+				<div class="titulo2 font_Uchen">Todas as operadoras de telefonia móvel</div>
+				<iframe src="heatmap/Heatmap_4G_Todas.html" frameborder="0" scrolling="no" style="width: 100%; height: 500px;" id="vis1"></iframe>
+			</div>
+            <div id="box_spac"></div>
+            <div id="box_g2">
+				<div class="titulo2 font_Uchen">Operadoras com maior nº de cobertura por estados</div>
+				<iframe src="heatmap/Heatmap_4G_maior_cobertura.html" frameborder="0" scrolling="no" style="width: 100%; height: 500px;" id="vis1"></iframe>
+			</div>
+			
+			<div id="divclear"></div>
+		</div>
+		
+
+		
+
+
+		
+
+	</main>
+
+	<footer>
+		<div id="box-f">
+			<p class="font_EncodeSansSC font_bold">Visualização de dados - 2021/01</p>
+			<p class="font_EncodeSansSC">Departamento de Ciência da Computação</br>
+				Instituto de Ciências Exatas</br>
+				Universidade Federal de Minas Gerais</p>
+				<p class="font_EncodeSansSC">Wuigor Ivens Siqueira Bine</p>
+				<div id="space-f"></div>
+			<img width="100" src="img/ufmg.svg" alt="ufmg">
+		</div>
+	</footer>
+			
+
+	<div id="divclear"></div>
+</body>
+<script>
+
+	var tech_atual = '4G';
+	$('#tech').on('change', function() {
+			switch(this.value){
+				case '4G':
+					tech_atual = '4G'
+					$('#estados').hide();
+					$('#regioes').val('0');
+					loadIframe("vis1","regioes/dados_regiao_moradores_4G.html")
+					loadIframe("vis2","regioes/dados_regiao_area_4G.html")
+					break;
+				case '3G':
+					tech_atual = '3G'
+					$('#estados').hide();
+					$('#regioes').val('0');
+					loadIframe("vis1","regioes/dados_regiao_moradores_3G.html")
+					loadIframe("vis2","regioes/dados_regiao_area_3G.html")
+					break;
+				case '2G':
+					tech_atual = '2G'
+					$('#estados').hide();
+					$('#regioes').val('0');
+					loadIframe("vis1","regioes/dados_regiao_moradores_2G.html")
+					loadIframe("vis2","regioes/dados_regiao_area_2G.html")
+					break;
+				
+			}
+
+		});
+
+
+	$('#regioes').on('change', function() {
+		switch(this.value){
+			case '0':
+				if(tech_atual=='4G'){
+					$('#estados').hide();
+					loadIframe("vis1","regioes/dados_regiao_moradores_4G.html")
+					loadIframe("vis2","regioes/.html")
+				}
+				else if(tech_atual=='3G'){
+					$('#estados').hide();
+					loadIframe("vis1","regioes/dados_regiao_moradores_3G.html")
+					loadIframe("vis2","regioes/.html")
+				}
+				else if(tech_atual=='2G'){
+					$('#estados').hide();
+					loadIframe("vis1","regioes/dados_regiao_moradores_2G.html")
+					loadIframe("vis2","regioes/.html")
+				}
+				break;
+			case 'Centro-oeste':
+				if(tech_atual=='4G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"DF\"">DF</option>').append('<option value=\"GO\">GO</option>').append('<option value=\"MS\">MS</option>').append('<option value=\"MT\">MT</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_4G_Centro-oeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_4G_Centro-oeste.html")
+				}
+				else if(tech_atual=='3G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"DF\"">DF</option>').append('<option value=\"GO\">GO</option>').append('<option value=\"MS\">MS</option>').append('<option value=\"MT\">MT</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_3G_Centro-oeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_3G_Centro-oeste.html")
+				}
+				else if(tech_atual=='2G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"DF\"">DF</option>').append('<option value=\"GO\">GO</option>').append('<option value=\"MS\">MS</option>').append('<option value=\"MT\">MT</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_2G_Centro-oeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_2G_Centro-oeste.html")
+				}
+				break;
+			case 'Nordeste':
+				if(tech_atual=='4G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"AL\"">AL</option>').append('<option value=\"BA\">BA</option>').append('<option value=\"CE\">CE</option>').append('<option value=\"MA\">MA</option>').append('<option value=\"PB\">PB</option>').append('<option value=\"PE\">PE</option>').append('<option value=\"PI\">PI</option>').append('<option value=\"RN\">RN</option>').append('<option value=\"SE\">SE</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_4G_Nordeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_4G_Nordeste.html")
+				}
+				else if(tech_atual=='3G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"AL\"">AL</option>').append('<option value=\"BA\">BA</option>').append('<option value=\"CE\">CE</option>').append('<option value=\"MA\">MA</option>').append('<option value=\"PB\">PB</option>').append('<option value=\"PE\">PE</option>').append('<option value=\"PI\">PI</option>').append('<option value=\"RN\">RN</option>').append('<option value=\"SE\">SE</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_3G_Nordeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_3G_Nordeste.html")
+				}
+				else if(tech_atual=='2G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"AL\"">AL</option>').append('<option value=\"BA\">BA</option>').append('<option value=\"CE\">CE</option>').append('<option value=\"MA\">MA</option>').append('<option value=\"PB\">PB</option>').append('<option value=\"PE\">PE</option>').append('<option value=\"PI\">PI</option>').append('<option value=\"RN\">RN</option>').append('<option value=\"SE\">SE</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_2G_Nordeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_2G_Nordeste.html")					
+				}
+				break;
+			case 'Norte':
+				if(tech_atual=='4G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"AC\"">AC</option>').append('<option value=\"AM\">AM</option>').append('<option value=\"AP\">AP</option>').append('<option value=\"PA\">PA</option>').append('<option value=\"RO\">RO</option>').append('<option value=\"RR\">RR</option>').append('<option value=\"TO\">TO</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_4G_Norte.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_4G_Norte.html")
+				}
+				else if(tech_atual=='3G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"AC\"">AC</option>').append('<option value=\"AM\">AM</option>').append('<option value=\"AP\">AP</option>').append('<option value=\"PA\">PA</option>').append('<option value=\"RO\">RO</option>').append('<option value=\"RR\">RR</option>').append('<option value=\"TO\">TO</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_3G_Norte.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_3G_Norte.html")
+				}
+				else if(tech_atual=='2G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"AC\"">AC</option>').append('<option value=\"AM\">AM</option>').append('<option value=\"AP\">AP</option>').append('<option value=\"PA\">PA</option>').append('<option value=\"RO\">RO</option>').append('<option value=\"RR\">RR</option>').append('<option value=\"TO\">TO</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_2G_Norte.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_2G_Norte.html")					
+				}
+				break;
+			case 'Sudeste':
+				if(tech_atual=='4G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"ES\"">ES</option>').append('<option value=\"MG\">MG</option>').append('<option value=\"RJ\">RJ</option>').append('<option value=\"SP\">SP</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_4G_Sudeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_4G_Sudeste.html")
+				}
+				else if(tech_atual=='3G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"ES\"">ES</option>').append('<option value=\"MG\">MG</option>').append('<option value=\"RJ\">RJ</option>').append('<option value=\"SP\">SP</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_3G_Sudeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_3G_Sudeste.html")
+				}
+				else if(tech_atual=='2G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"ES\"">ES</option>').append('<option value=\"MG\">MG</option>').append('<option value=\"RJ\">RJ</option>').append('<option value=\"SP\">SP</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_2G_Sudeste.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_2G_Sudeste.html")					
+				}
+				break;
+			case 'Sul':
+				if(tech_atual=='4G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"PR\"">PR</option>').append('<option value=\"RS\">RS</option>').append('<option value=\"SC\">SC</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_4G_Sul.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_4G_Sul.html")
+				}
+				else if(tech_atual=='3G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"PR\"">PR</option>').append('<option value=\"RS\">RS</option>').append('<option value=\"SC\">SC</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_3G_Sul.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_3G_Sul.html")
+				}
+				else if(tech_atual=='2G'){
+					$('#estados').children().remove().end().append('<option value=\"0\"">Selecione o estado</option>').append('<option value=\"PR\"">PR</option>').append('<option value=\"RS\">RS</option>').append('<option value=\"SC\">SC</option>');
+					$('#estados').show();
+					loadIframe("vis1","regioes_estados/moradores/dados_regiao_morador_2G_Sul.html")
+					loadIframe("vis2","regioes_estados/area/dados_regiao_area_2G_Sul.html")					
+				}
+				break;
+			
+		}
+
+	});
+
+
+	$('#estados').on('change', function() {
+			switch(this.value){
+				case 'AC':
+					if(tech_atual=='4G'){
+						loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_AC.html")
+						loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_AC.html")		
+					}
+					else if(tech_atual=='3G'){
+						loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_AC.html")
+						loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_AC.html")	
+					}
+					else if(tech_atual=='2G'){
+						loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_AC.html")
+						loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_AC.html")							
+					}
+					break;
+				case 'AL':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_AL.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_AL.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_AL.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_AL.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_AL.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_AL.html")							
+					}
+					break;
+				case 'AM':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_AM.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_AL.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_AM.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_AL.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_AM.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_AL.html")							
+					}
+					break;
+				case 'AP':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_AP.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_AP.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_AP.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_AP.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_AP.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_AP.html")							
+					}
+					break;
+				case 'BA':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_BA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_BA.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_BA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_BA.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_BA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_BA.html")							
+					}
+					break;
+				case 'CE':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_CE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_CE.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_CE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_CE.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_CE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_CE.html")							
+					}
+					break;
+				case 'DF':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_DF.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_DF.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_DF.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_DF.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_DF.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_DF.html")							
+					}
+					break;
+				case 'ES':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_ES.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_ES.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_ES.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_ES.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_ES.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_ES.html")							
+					}
+					break;
+				case 'GO':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_GO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_ES.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_GO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_ES.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_GO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_ES.html")							
+					}
+					break;
+				case 'MA':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_MA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_MA.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_MA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_MA.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_MA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_MA.html")							
+					}
+					break;
+				case 'MG':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_MG.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_MG.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_MG.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_MG.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_MG.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_MG.html")							
+					}
+					break;
+				case 'MS':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_MS.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_MS.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_MS.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_MS.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_MS.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_MS.html")							
+					}
+					break;
+				case 'MT':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_MT.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_MT.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_MT.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_MT.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_MT.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_MT.html")							
+					}
+					break;
+				case 'PA':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_PA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_PA.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_PA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_PA.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_PA.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_PA.html")							
+					}
+					break;
+				case 'PB':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_PB.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_PB.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_PB.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_PB.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_PB.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_PB.html")							
+					}
+					break;
+				case 'PE':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_PE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_PE.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_PE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_PE.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_PE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_PE.html")							
+					}
+					break;
+				case 'PI':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_PI.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_PI.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_PI.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_PI.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_PI.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_PI.html")							
+					}
+					break;
+				case 'PR':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_PR.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_PR.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_PR.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_PR.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_PR.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_PR.html")							
+					}
+					break;
+				case 'RJ':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_RJ.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_RJ.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_RJ.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_RJ.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_RJ.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_RJ.html")							
+					}
+					break;
+				case 'RN':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_RN.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_RN.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_RN.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_RN.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_RN.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_RN.html")							
+					}
+					break;
+				case 'RO':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_RO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_RO.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_RO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_RO.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_RO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_RO.html")							
+					}
+					break;
+				case 'RR':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_RR.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_RR.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_RR.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_RR.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_RR.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_RR.html")							
+					}
+					break;
+				case 'RS':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_RS.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_RS.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_RS.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_RS.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_RS.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_RS.html")							
+					}
+					break;
+				case 'SC':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_SC.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_SC.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_SC.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_SC.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_SC.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_SC.html")							
+					}
+					break;
+				case 'SE':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_SE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_SE.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_SE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_SE.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_SE.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_SE.html")							
+					}
+					break;
+				case 'SP':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_SP.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_SP.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_SP.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_SP.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_SP.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_SP.html")							
+					}
+					break;
+				case 'TO':
+					if(tech_atual=='4G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_4G_TO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_4G_TO.html")		
+					}
+					else if(tech_atual=='3G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_3G_TO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_3G_TO.html")	
+					}
+					else if(tech_atual=='2G'){
+							loadIframe("vis1","regioes_estados/moradores/dados_cidades_morador_2G_TO.html")
+							loadIframe("vis2","regioes_estados/area/dados_cidades_area_2G_TO.html")							
+					}
+					break;
+				
+			}
+
+	});
+
+
+	function loadIframe(iframeName, url) {
+		var $iframe = $('#' + iframeName);
+		if ( $iframe.length ) {
+			$iframe.attr('src',url);   
+			return false;
+		}
+		return true;
+	}
+</script>
+</html>

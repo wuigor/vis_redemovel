@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Visualizações Cobertura Movel</title>
+<link href="estilo.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+	<header>
+		<a class="link-logo" href="index.html">
+			<div id="logo" class="font_Uchen">
+			REDE MÓVEL</br>
+			BRASIL
+			</div>
+		</a>
+
+		<div id="menu"></div>
+
+	</header>
+
+	<main>
+
+
+		
+
+
+
+		<div id="box_view">
+
+			<p class="titulo font_Montserrat">Cobertura de rede móvel em ambientes Urbanos e Rurais</p>
+
+
+			<form class="filtros">
+				<div id="contener-buttons">
+					<div class="font_Uchen font_bold">Selecione uma categoria</div>
+					<select class="select_regioes font_Montserrat" id="local">
+						<option class="select_regioes font_Montserrat" value="todos">Todos</option>
+						<option class="select_regioes font_Montserrat" value="urbano">Urbano</option>
+						<option class="select_regioes font_Montserrat" value="rural">Rural</option>
+					</select>
+				</div>
+				</form>
+
+
+
+			<div id="view_mapa">
+
+				<div id="mapa_view">
+					<div class="titulo2 font_Uchen">4G Urbano</div>
+				</div>
+				<div id="mapa_view">
+					<div class="titulo2 font_Uchen">3G Urbano</div>
+				</div>
+				<div id="mapa_view">
+					<div class="titulo2 font_Uchen">2G Urbano</div>
+				</div>
+				<div id="divclear"></div>
+				<iframe src="mapas/todos.html" frameborder="0" scrolling="no" style="width: 100%; height: 500px;" id="vis1"></iframe>
+
+			</div>
+
+		</div>
+		
+
+		
+
+
+		
+
+	</main>
+
+	<footer>
+		<div id="box-f">
+			<p class="font_EncodeSansSC font_bold">Visualização de dados - 2021/01</p>
+			<p class="font_EncodeSansSC">Departamento de Ciência da Computação</br>
+				Instituto de Ciências Exatas</br>
+				Universidade Federal de Minas Gerais</p>
+				<p class="font_EncodeSansSC">Wuigor Ivens Siqueira Bine</p>
+				<div id="space-f"></div>
+			<img width="100" src="img/ufmg.svg" alt="ufmg">
+		</div>
+	</footer>
+			
+
+	<div id="divclear"></div>
+</body>
+<script>
+
+	$('#local').on('change', function() {
+			switch(this.value){
+				case 'todos':
+					loadIframe("vis1","mapas/todos.html");
+					break;
+				case 'urbano':
+					loadIframe("vis1","mapas/urbano.html");
+					break;
+				case 'rural':
+					loadIframe("vis1","mapas/rural.html");
+					break;
+				
+			}
+
+		});
+
+
+	function loadIframe(iframeName, url) {
+		var $iframe = $('#' + iframeName);
+		if ( $iframe.length ) {
+			$iframe.attr('src',url);   
+			return false;
+		}
+		return true;
+	}
+</script>
+</html>
