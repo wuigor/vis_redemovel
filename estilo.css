@@ -44,7 +44,7 @@ main {
 }
 
 
-.titulo {font-size: 22px; font-weight: bold; padding-top: 15px; padding-left: 15px;}
+.titulo {font-size: 22px; font-weight: bold; padding-left: 15px;}
 .titulo2 {font-size: 22px; text-align: center;}
 .subtitle {font-size: 22px; font-weight: bold; padding-top: 15px; padding-left: 15px; color:#1c86d1;}
 .titulo_grafico {font-size: 22px; font-weight: bold; padding-top: 5px; padding-left: 15px;}
@@ -85,7 +85,21 @@ main {
 #contener-buttons {width: auto; padding-left: 30px; padding-bottom: 10px;}
 
 #mapa_view {width: 32%; height: auto; float: left;}
-#view_mapa {width:100%; height: auto;}
+#view_mapa2 {width:90%; height: auto; float: left;}
+#view_mapa1 {width: 7%; height: auto; float: left; padding-top:140px;}
+#box_mapa_full {width: 1005; height: auto; display: none;}
+#box_tech_urban {display: none;}
+#box_tech_rural {display: none;}
+
+#box_status {width: 100%; height: auto; padding-top: 20px; padding-left:20px; font-size: 10pt;}
+.status_atual {color: #1c86d1;}
+
+
+.link2 {color: #000; font-weight: bold;}
+.link2:link {text-decoration: none;}
+.link2:active{text-decoration: none;}
+.link2:hover{text-decoration: none; font-weight: bold; color:#FF5555;}
+
 
 #divclear {clear: both;}
 

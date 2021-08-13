@@ -32,6 +32,10 @@
 
 		<div id="box_view">
 
+			<div id="box_status" class="font_Montserrat font_bold">
+				<a class="link2" href="index.html">Visualização das rede móvel do Brasil</a> > <span class="status_atual">Cobertura de rede móvel em ambientes Urbanos e Rurais</span>
+			</div>
+
 			<p class="titulo font_Montserrat">Cobertura de rede móvel em ambientes Urbanos e Rurais</p>
 
 
@@ -46,24 +50,61 @@
 				</div>
 				</form>
 
-
-
-			<div id="view_mapa">
-
-				<div id="mapa_view">
-					<div class="titulo2 font_Uchen">4G Urbano</div>
-				</div>
-				<div id="mapa_view">
-					<div class="titulo2 font_Uchen">3G Urbano</div>
-				</div>
-				<div id="mapa_view">
-					<div class="titulo2 font_Uchen">2G Urbano</div>
-				</div>
-				<div id="divclear"></div>
-				<iframe src="mapas/todos.html" frameborder="0" scrolling="no" style="width: 100%; height: 500px;" id="vis1"></iframe>
-
+			<div id="box_tech">
+					<div class="titulo2 font_Uchen">Tecnologias das redes</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">4G</div>
+					</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">3G</div>
+					</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">2G</div>
+					</div>
+					<div id="divclear"></div>
 			</div>
 
+			<div id="view_mapa1">
+				<div class="titulo2 font_Uchen">Urbano</div>
+				</br></br></br>
+				<div class="titulo2 font_Uchen">Rural</div>
+			</div>
+
+			<div id="view_mapa2">
+				<iframe src="mapas/todos.html" frameborder="0" scrolling="no" style="width: 100%; height: 500px;" id="vis1"></iframe>
+			</div>
+			
+			<div id="box_mapa_full">
+				<div id="box_tech_urban">
+					<div class="titulo2 font_Uchen">Tecnologias das redes</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">4G Urbano</div>
+					</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">3G Urbano</div>
+					</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">2G Urbano</div>
+					</div>
+					<div id="divclear"></div>
+				</div>
+				<div id="box_tech_rural">
+					<div class="titulo2 font_Uchen">Tecnologias das redes</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">4G Rural</div>
+					</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">3G Rural</div>
+					</div>
+					<div id="mapa_view">
+						<div class="titulo2 font_Uchen">2G Rural</div>
+					</div>
+					<div id="divclear"></div>
+				</div>
+				<iframe src="mapas/todos.html" frameborder="0" scrolling="no" style="width: 100%; height: 500px;" id="vis2"></iframe>
+			</div>
+
+			<div id="divclear"></div>
 		</div>
 		
 
@@ -82,7 +123,7 @@
 				Universidade Federal de Minas Gerais</p>
 				<p class="font_EncodeSansSC">Wuigor Ivens Siqueira Bine</p>
 				<div id="space-f"></div>
-				<img width="100" src="img/ufmg.png" alt="ufmg">
+			<img width="100" src="img/ufmg.svg" alt="ufmg">
 		</div>
 	</footer>
 			
@@ -94,13 +135,31 @@
 	$('#local').on('change', function() {
 			switch(this.value){
 				case 'todos':
+					$('#box_tech').show();
+					$('#view_mapa1').show();
+					$('#view_mapa2').show();
+					$('#box_mapa_full').hide();
+					$('#box_tech_rural').hide();
+					$('#box_tech_urban').hide();
 					loadIframe("vis1","mapas/todos.html");
 					break;
 				case 'urbano':
-					loadIframe("vis1","mapas/urbano.html");
+					$('#box_tech').hide();
+					$('#view_mapa1').hide();
+					$('#view_mapa2').hide();
+					$('#box_tech_rural').hide();
+					$('#box_mapa_full').show();
+					$('#box_tech_urban').show();
+					loadIframe("vis2","mapas/urbano.html");
 					break;
 				case 'rural':
-					loadIframe("vis1","mapas/rural.html");
+					$('#box_tech').hide();
+					$('#view_mapa1').hide();
+					$('#view_mapa2').hide();
+					$('#box_tech_urban').hide();
+					$('#box_mapa_full').show();
+					$('#box_tech_rural').show();
+					loadIframe("vis2","mapas/rural.html");
 					break;
 				
 			}
